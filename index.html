@@ -7,107 +7,161 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: #f7f7f7;
+            background: #f0f7f7; /* 更改为淡淡的薄荷色背景 */
             margin: 0;
             padding: 20px;
         }
 
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            max-width: 200px;
+            transition: transform 0.3s;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
         .dog-calculator {
             max-width: 600px;
-            margin: 40px auto;
-            padding: 20px;
+            margin: 20px auto;
+            padding: 25px;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .input-group label {
             display: block;
-            margin-bottom: 5px;
-            color: #4a4a4a;
-            font-size: 14px;
+            margin-bottom: 8px;
+            color: #7ecece; /* 更改为薄荷绿色 */
+            font-size: 15px;
+            font-weight: bold;
         }
 
         .input-group input,
         .input-group select {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 12px;
+            border: 2px solid #b5e6e6; /* 更柔和的薄荷色边框 */
+            border-radius: 8px;
             font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #7ecece;
         }
 
         .calculate-btn {
-            background: #00a0e9;
+            background: #7ecece; /* 薄荷绿色按钮 */
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
+            padding: 15px 25px;
+            border-radius: 8px;
             cursor: pointer;
             width: 100%;
             font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .calculate-btn:hover {
+            background: #6bbbbb; /* 深一点的薄荷色 */
+            transform: translateY(-2px);
         }
 
         .result {
-            margin-top: 15px;
-            padding: 15px;
-            background: #f5f5f5;
-            border-radius: 4px;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f0f7f7; /* 淡薄荷色背景 */
+            border-radius: 8px;
             display: none;
+            border: 2px solid #b5e6e6;
         }
 
         .result.show {
             display: block;
+            animation: fadeIn 0.5s;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
+        .result h4 {
+            color: #7ecece;
+            margin-top: 0;
         }
 
-        .header img {
-            max-width: 200px;
-            margin-bottom: 20px;
+        .result p {
+            margin: 10px 0;
+            color: #666;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .back-to-store {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         .back-to-store a {
-            color: #00a0e9;
+            color: #7ecece;
             text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .back-to-store a:hover {
+            color: #6bbbbb;
+        }
+
+        h2 {
+            color: #7ecece;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
         }
     </style>
 </head>
 <body>
-    <div class="header">
+    <div class="logo">
         <a href="https://huppy.official.ec/">
-            <img src="https://huppy.official.ec/img/logo.png" alt="Huppy">
+            <img src="https://raw.githubusercontent.com/Huppypetstore/dogdryfood/main/huppy.png" alt="Huppy">
         </a>
     </div>
 
     <div class="dog-calculator">
-        <h2>ドッグフード栄養計算機</h2>
+        <h2>🐾 ドッグフード栄養計算機 🐾</h2>
         <p>愛犬に最適な1日の栄養摂取量を計算します。</p>
 
         <div class="input-group">
-            <label>愛犬の体重 (kg)</label>
-            <input type="number" id="dogWeight" min="0" step="0.1">
+            <label>🐕 愛犬の体重 (kg)</label>
+            <input type="number" id="dogWeight" min="0" step="0.1" placeholder="例: 5.5">
         </div>
 
         <div class="input-group">
-            <label>年齢 (歳)</label>
-            <input type="number" id="dogAge" min="0">
+            <label>🎂 年齢 (歳)</label>
+            <input type="number" id="dogAge" min="0" placeholder="例: 3">
         </div>
 
         <div class="input-group">
-            <label>活動レベル</label>
+            <label>🦮 活動レベル</label>
             <select id="activityLevel">
                 <option value="low">低い（室内中心）</option>
                 <option value="normal">普通</option>
@@ -115,7 +169,7 @@
             </select>
         </div>
 
-        <button onclick="calculateNutrition()" class="calculate-btn">計算する</button>
+        <button onclick="calculateNutrition()" class="calculate-btn">計算する ✨</button>
 
         <div id="resultArea" class="result">
             <!-- 結果がここに表示されます -->
@@ -153,11 +207,11 @@
 
             const resultArea = document.getElementById('resultArea');
             resultArea.innerHTML = `
-                <h4>1日の推奨摂取量</h4>
-                <p>カロリー: ${Math.round(dailyCalories)} kcal</p>
-                <p>タンパク質: ${Math.round(protein)}g</p>
-                <p>脂質: ${Math.round(fat)}g</p>
-                <p>炭水化物: ${Math.round(carbs)}g</p>
+                <h4>✨ 1日の推奨摂取量 ✨</h4>
+                <p>🔥 カロリー: ${Math.round(dailyCalories)} kcal</p>
+                <p>🥩 タンパク質: ${Math.round(protein)}g</p>
+                <p>🥑 脂質: ${Math.round(fat)}g</p>
+                <p>🍚 炭水化物: ${Math.round(carbs)}g</p>
             `;
             resultArea.classList.add('show');
         }
